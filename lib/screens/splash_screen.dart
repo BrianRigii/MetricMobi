@@ -10,7 +10,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset('assets/images/logo'),
+        child: Image.asset(
+          'assets/images/logo.png',
+          width: 300,
+        ),
       ),
     );
   }
