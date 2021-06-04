@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:metric/data/database.dart';
+import 'package:metric/routes.dart';
+import 'package:metric/services/auth_service.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -6,6 +9,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    db.init();
+  }
+
+  void navigator() {
+    if (authService.isLoggedIn) {
+      Navigator.of(context).pushNamed(RouteConfig.loadscreen);
+    } else {
+      Navigator.of(context).pushNamed(RouteConfig.loginscreen);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
