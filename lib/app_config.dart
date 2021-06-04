@@ -7,3 +7,5 @@ class AppConfig {
     canvasColor: Colors.white,
   );
 }
+
+AppConfig appConfig = AppConfig();
