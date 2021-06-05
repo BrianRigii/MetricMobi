@@ -12,10 +12,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    db.init();
+
+    navigator();
   }
 
-  void navigator() {
+  void navigator() async {
+    await db.init();
     if (authService.isLoggedIn) {
       Navigator.of(context).pushNamed(RouteConfig.loadscreen);
     } else {

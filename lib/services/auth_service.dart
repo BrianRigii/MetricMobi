@@ -4,7 +4,7 @@ import 'package:metric/data/database.dart';
 import 'package:metric/data/models/auth_model.dart';
 
 class AuthService extends ChangeNotifier {
-  bool get isLoggedIn => db.authBox.values.first.accessToken != null;
+  bool get isLoggedIn => db.authBox.values.isNotEmpty;
 
   ValueNotifier<bool> _isLoggingin = ValueNotifier(false);
   bool get isLoggingin => _isLoggingin.value;

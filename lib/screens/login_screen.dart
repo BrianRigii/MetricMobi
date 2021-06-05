@@ -11,23 +11,35 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/images/logo.png'),
-            SizedBox(
-              height: 32,
-            ),
-            CustomBoxTxtField(
-              label: "Reference",
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            CustomBoxTxtField(
-              label: 'Password',
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 150,
+              ),
+              SizedBox(
+                height: 32,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    CustomBoxTxtField(
+                      label: "Reference",
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    CustomBoxTxtField(
+                      label: 'Password',
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
