@@ -14,14 +14,23 @@ class DioApi {
         RequestOptions options, RequestInterceptorHandler handler) {
       print(
           "${options?.method}: ${options?.baseUrl}${options?.path} ${options?.queryParameters} ${options.data}");
+      return handler.next(
+        options,
+      );
     }
 
-    void _responseIntercept(response, responseHandler) {
-      print("${response.request?.path} ${response?.data}");
+    void _responseIntercept(
+        response, ResponseInterceptorHandler responseHandler) {
+      // print("${response.request?.path} ${response?.data}");
+      print('$response');
+      return responseHandler.next(response);
     }
 
-    void _errorIntercept(DioError error, errorHandler) {
-      print("${error.requestOptions?.path} ${error.response?.data}");
+    void _errorIntercept(DioError error, ErrorInterceptorHandler errorHandler) {
+      print(
+        "${error.requestOptions?.path} ${error.response?.data}",
+      );
+      return errorHandler.next(error);
     }
 
     dio.interceptors.add(InterceptorsWrapper(onRequest: _requestIntercept));

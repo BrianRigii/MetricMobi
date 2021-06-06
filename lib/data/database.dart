@@ -13,6 +13,7 @@ class Database {
 
   void _registerAdapters() {
     Hive.registerAdapter(AuthModelAdapter());
+    Hive.registerAdapter(UserCourseAdapter());
   }
 
   _initailiseBoxes() async {

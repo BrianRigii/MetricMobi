@@ -5,6 +5,7 @@ import 'package:metric/data/models/auth_model.dart';
 
 class AuthService extends ChangeNotifier {
   bool get isLoggedIn => db.authBox.values.isNotEmpty;
+  AuthModel get authUser => db.authBox.values.first;
 
   ValueNotifier<bool> isLoggingin = ValueNotifier(false);
   // bool get isLoggingin => _isLoggingin.value;
@@ -16,6 +17,7 @@ class AuthService extends ChangeNotifier {
   Future login(String reference, String password) {
     _isLoggingin = true;
     return api.login(reference, password).then((response) {
+      print('response is $response');
       var payload = response.data;
       _saveAuthData(payload);
       _isLoggingin = false;
@@ -27,7 +29,9 @@ class AuthService extends ChangeNotifier {
   }
 
   void _saveAuthData(payload) {
-    db.authBox.add(AuthModel.fromMap(payload));
+    if (payload != null) {
+      db.authBox.add(AuthModel.fromMap(payload));
+    }
   }
 }
 

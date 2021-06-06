@@ -22,7 +22,8 @@ class AuthModel {
   final String notificationChannel;
   @HiveField(8)
   final List<UserCourse> courses;
-
+  @HiveField(9)
+  final String name;
   AuthModel({
     this.id,
     this.referenceid,
@@ -33,6 +34,7 @@ class AuthModel {
     this.deviceToken,
     this.notificationChannel,
     this.courses,
+    this.name,
   });
 
   Map<String, dynamic> toMap() {
@@ -54,6 +56,7 @@ class AuthModel {
 
     return AuthModel(
       id: map['id'],
+      name: map['name'],
       referenceid: map['referenceid'],
       photoUrl: map['photoUrl'],
       phone: map['phone'],
@@ -67,11 +70,17 @@ class AuthModel {
   }
 }
 
+@HiveType(typeId: 2)
 class UserCourse {
+  @HiveField(0)
   final int id;
+  @HiveField(1)
   final String name;
+  @HiveField(2)
   final String code;
+  @HiveField(3)
   final int departmentid;
+  @HiveField(4)
   final String department;
 
   UserCourse(

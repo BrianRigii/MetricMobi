@@ -29,73 +29,75 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32.0),
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 180,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32.0),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    width: 180,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomBoxTxtField(
-                      label: "Reference",
-                      textEditingController: _referenceController,
-                      validatorTxt: 'Reference is required',
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    CustomBoxTxtField(
-                      label: 'Password',
-                      textEditingController: _passwordController,
-                      validatorTxt: 'Password is required',
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: authService.isLoggingin,
-                      builder: (context, isLoggingin, _) {
-                        return MaterialButton(
-                          minWidth: 400,
-                          disabledColor:
-                              Theme.of(context).primaryColor.withOpacity(.5),
-                          color: Theme.of(context).primaryColor,
-                          textColor: Colors.white,
-                          onPressed: isLoggingin
-                              ? null
-                              : () {
-                                  if (_formKey.currentState.validate()) {
-                                    _loginFn(_referenceController.text,
-                                        _passwordController.text);
-                                  }
-                                },
-                          child: CircularMaterialSpinner(
-                            loading: isLoggingin,
-                            isBtn: true,
-                            child: Text('LOGIN'),
-                          ),
-                        );
-                      },
-                    ),
-                    TextButton(
-                        onPressed: () {}, child: Text('Forgot Password ?'))
-                  ],
+                SizedBox(
+                  height: 50,
                 ),
-              ),
-            ],
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomBoxTxtField(
+                        label: "Reference",
+                        textEditingController: _referenceController,
+                        validatorTxt: 'Reference is required',
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      CustomBoxTxtField(
+                        label: 'Password',
+                        textEditingController: _passwordController,
+                        validatorTxt: 'Password is required',
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: authService.isLoggingin,
+                        builder: (context, isLoggingin, _) {
+                          return MaterialButton(
+                            minWidth: 400,
+                            disabledColor:
+                                Theme.of(context).primaryColor.withOpacity(.5),
+                            color: Theme.of(context).primaryColor,
+                            textColor: Colors.white,
+                            onPressed: isLoggingin
+                                ? null
+                                : () {
+                                    if (_formKey.currentState.validate()) {
+                                      _loginFn(_referenceController.text,
+                                          _passwordController.text);
+                                    }
+                                  },
+                            child: CircularMaterialSpinner(
+                              loading: isLoggingin,
+                              isBtn: true,
+                              child: Text('LOGIN'),
+                            ),
+                          );
+                        },
+                      ),
+                      TextButton(
+                          onPressed: () {}, child: Text('Forgot Password ?'))
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

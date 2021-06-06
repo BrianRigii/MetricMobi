@@ -26,13 +26,14 @@ class AuthModelAdapter extends TypeAdapter<AuthModel> {
       deviceToken: fields[6] as String,
       notificationChannel: fields[7] as String,
       courses: (fields[8] as List)?.cast<UserCourse>(),
+      name: fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, AuthModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class AuthModelAdapter extends TypeAdapter<AuthModel> {
       ..writeByte(7)
       ..write(obj.notificationChannel)
       ..writeByte(8)
-      ..write(obj.courses);
+      ..write(obj.courses)
+      ..writeByte(9)
+      ..write(obj.name);
   }
 
   @override
@@ -60,6 +63,52 @@ class AuthModelAdapter extends TypeAdapter<AuthModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is AuthModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class UserCourseAdapter extends TypeAdapter<UserCourse> {
+  @override
+  final int typeId = 2;
+
+  @override
+  UserCourse read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return UserCourse(
+      id: fields[0] as int,
+      name: fields[1] as String,
+      code: fields[2] as String,
+      departmentid: fields[3] as int,
+      department: fields[4] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, UserCourse obj) {
+    writer
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.code)
+      ..writeByte(3)
+      ..write(obj.departmentid)
+      ..writeByte(4)
+      ..write(obj.department);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserCourseAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
