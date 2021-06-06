@@ -13,7 +13,7 @@ class DioApi {
     void _requestIntercept(
         RequestOptions options, RequestInterceptorHandler handler) {
       print(
-          "REQUEST: ${options?.method}: ${options?.baseUrl}${options?.path} ${options?.queryParameters}");
+          "${options?.method}: ${options?.baseUrl}${options?.path} ${options?.queryParameters} ${options.data}");
     }
 
     void _responseIntercept(response, responseHandler) {
