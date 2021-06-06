@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:metric/screens/load_screen.dart';
+import 'package:metric/screens/student_home_screen.dart';
 
 class HomeBottomNav extends StatefulWidget {
   const HomeBottomNav({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
     });
   }
 
-  List<Widget> _pages = [LoadScreen()];
+  List<Widget> _pages = [StudentHomeScreen(), LoadScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -35,30 +36,30 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
             ),
           ),
           BottomNavigationBarItem(
-            label: 'Home',
+            label: 'Calendar',
             icon: Icon(
-              EvaIcons.barChart2Outline,
+              EvaIcons.calendarOutline,
               color: Theme.of(context).primaryColor,
             ),
           ),
           BottomNavigationBarItem(
-            label: 'Home',
+            label: 'Todos',
             icon: Icon(
               EvaIcons.bookmarkOutline,
               color: Theme.of(context).primaryColor,
             ),
           ),
           BottomNavigationBarItem(
-            label: 'Home',
+            label: 'Messages',
             icon: Icon(
               EvaIcons.messageSquareOutline,
               color: Theme.of(context).primaryColor,
             ),
           ),
           BottomNavigationBarItem(
-            label: 'Home',
+            label: 'Notifications',
             icon: Icon(
-              EvaIcons.personOutline,
+              EvaIcons.bellOutline,
               color: Theme.of(context).primaryColor,
             ),
           ),

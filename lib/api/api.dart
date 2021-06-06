@@ -11,6 +11,10 @@ class Api extends DioApi {
       "password": password,
     });
   }
+
+  Future getUnits() {
+    return dio.get('/units');
+  }
 }
 
 Api api = Api();

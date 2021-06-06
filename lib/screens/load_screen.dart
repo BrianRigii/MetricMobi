@@ -19,7 +19,6 @@ class _LoadScreenState extends State<LoadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Center(
         child: Text('${authService.authUser.email}'),
       ),
