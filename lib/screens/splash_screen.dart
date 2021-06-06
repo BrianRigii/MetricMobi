@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigator() async {
     await db.init();
     if (authService.isLoggedIn) {
-      Navigator.of(context).pushNamed(RouteConfig.loadscreen);
+      Navigator.of(context).pushNamed(RouteConfig.homebottomnav);
     } else {
       Navigator.of(context).pushNamed(RouteConfig.loginscreen);
     }

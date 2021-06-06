@@ -55,15 +55,15 @@ class AuthModel {
     if (map == null) return null;
 
     return AuthModel(
-      id: map['id'],
-      name: map['name'],
-      referenceid: map['referenceid'],
-      photoUrl: map['photoUrl'],
-      phone: map['phone'],
-      email: map['email'],
-      accessToken: map['accessToken'],
-      deviceToken: map['deviceToken'],
-      notificationChannel: map['notificationChannel'],
+      id: map['user']['id'],
+      name: map['user']['name'],
+      referenceid: map['user']['referenceid'],
+      photoUrl: map['user']['photoUrl'],
+      phone: map['user']['phone'],
+      email: map['user']['email'],
+      accessToken: map['token'],
+      deviceToken: map['user']['device_token'],
+      notificationChannel: map['user']['preferred_notification_channel'],
       courses: List<UserCourse>.from(
           map['courses']?.map((x) => UserCourse.fromMap(x))),
     );
