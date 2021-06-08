@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:metric/screens/load_screen.dart';
 import 'package:metric/screens/student_home_screen.dart';
+import 'package:metric/services/unit_service.dart';
 
 class HomeBottomNav extends StatefulWidget {
   const HomeBottomNav({Key key}) : super(key: key);
@@ -20,6 +21,18 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
   }
 
   List<Widget> _pages = [StudentHomeScreen(), LoadScreen()];
+
+  @override
+  void initState() {
+    super.initState();
+    callApis();
+  }
+
+  void callApis() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unitService.loadUnits();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

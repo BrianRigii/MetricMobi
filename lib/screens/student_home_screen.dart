@@ -11,14 +11,15 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Text(
-            'Courses',
-            style: TextStyle(fontWeight: FontWeight.w500),
-          ),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(
+              'Courses',
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
       ),
     );
   }
