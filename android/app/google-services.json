@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1024338240083",
+    "project_id": "metric-cc5da",
+    "storage_bucket": "metric-cc5da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024338240083:android:36e2ee7c9a53c1396a1ca6",
+        "android_client_info": {
+          "package_name": "com.metric.metric"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024338240083-gtvd19lfdnsgb6l09md6t24ki1nu40d7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj5IdthB5vzRKfPXWPBdaajfNUybQvCfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024338240083-gtvd19lfdnsgb6l09md6t24ki1nu40d7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
