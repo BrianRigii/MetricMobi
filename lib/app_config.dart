@@ -4,7 +4,7 @@ class AppConfig {
   static const appUrl = 'https://metric.co.ke/api';
 
   static ThemeData themedata = ThemeData(
-    canvasColor: Colors.white,
+    primaryColor: Color.fromRGBO(37, 41, 75, 1),
   );
 }
 
