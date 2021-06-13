@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService extends ChangeNotifier {
   FirebaseMessaging messaging;
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   AndroidNotificationChannel channel1 = AndroidNotificationChannel(
       'regular_notification_channel',
@@ -22,8 +25,41 @@ class NotificationService extends ChangeNotifier {
     }
   }
 
+  setup() async {
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(notificationService.channel1);
+
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+  }
+
   generateDeviceToken() async {
     return await messaging.getToken().then((value) => value);
+  }
+
+  void showNotification(RemoteMessage message) {
+    RemoteNotification notification = message.notification;
+    AndroidNotification android = message.notification?.android;
+    if (notification != null && android != null) {
+      flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+              android: AndroidNotificationDetails(
+                  notificationService.channel1.id,
+                  notificationService.channel1.name,
+                  notificationService.channel1.description,
+                  playSound: true,
+                  color: Colors.orange,
+                  icon: "@mipmap/ic_launcher")));
+    }
   }
 }
 
