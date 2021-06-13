@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:metric/api/api.dart';
 import 'package:metric/data/database.dart';
 import 'package:metric/data/models/auth_model.dart';
+import 'package:metric/services/notifications_service.dart';
 
 class AuthService extends ChangeNotifier {
   bool get isLoggedIn => db.authBox.values.isNotEmpty;
   AuthModel get authUser => db.authBox.values.first;
+  String deviceToken;
 
   ValueNotifier<bool> isLoggingin = ValueNotifier(false);
   // bool get isLoggingin => _isLoggingin.value;
@@ -14,9 +16,10 @@ class AuthService extends ChangeNotifier {
     isLoggingin.value = val;
   }
 
-  Future login(String reference, String password) {
+  Future login(String reference, String password) async {
     _isLoggingin = true;
-    return api.login(reference, password).then((response) {
+    await setDeviceToken();
+    return api.login(reference, password, deviceToken).then((response) {
       print('response is $response');
       var payload = response.data;
       _saveAuthData(payload);
@@ -32,6 +35,12 @@ class AuthService extends ChangeNotifier {
     if (payload != null) {
       db.authBox.add(AuthModel.fromMap(payload));
     }
+  }
+
+  setDeviceToken() async {
+    String deviceToken = notificationService.generateDeviceToken();
+    await db.deviceSettings.put('deviceToken', deviceToken);
+    return deviceToken;
   }
 }
 

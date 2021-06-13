@@ -4,6 +4,7 @@ import 'package:metric/data/models/auth_model.dart';
 
 class Database {
   Box<AuthModel> authBox;
+  Box deviceSettings;
 
   init() async {
     await Hive.initFlutter();
@@ -18,6 +19,7 @@ class Database {
 
   _initailiseBoxes() async {
     authBox = await Hive.openBox('authbox');
+    deviceSettings = await Hive.openBox('devicesettings');
   }
 }
 

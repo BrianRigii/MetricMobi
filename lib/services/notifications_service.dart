@@ -1,19 +1,30 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class NotificationsService {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
+class NotificationService extends ChangeNotifier {
+  FirebaseMessaging messaging;
 
-  init() async {
+  AndroidNotificationChannel channel1 = AndroidNotificationChannel(
+      'regular_notification_channel',
+      'High importance notifications',
+      'channel for important notifications',
+      enableVibration: true,
+      playSound: true,
+      importance: Importance.high);
+
+  init({bool initMessaging = false}) async {
     await Firebase.initializeApp();
-    listen();
+
+    if (initMessaging) {
+      messaging = FirebaseMessaging.instance;
+    }
   }
 
-  listen() async {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {});
-
-    FirebaseMessaging.onBackgroundMessage((message) async {
-      await Firebase.initializeApp();
-    });
+  generateDeviceToken() async {
+    return await messaging.getToken().then((value) => value);
   }
 }
+
+NotificationService notificationService = NotificationService();

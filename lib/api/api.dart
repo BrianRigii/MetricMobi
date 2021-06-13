@@ -5,10 +5,11 @@ import 'package:metric/app_config.dart';
 class Api extends DioApi {
   Api() : super(AppConfig.appUrl);
 
-  Future login(String reference, String password) {
+  Future login(String reference, String password, String deviceToken) {
     return dio.post('/login', data: {
       "reference": reference,
       "password": password,
+      "device_token": deviceToken
     });
   }
 
