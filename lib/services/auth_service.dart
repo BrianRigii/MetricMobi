@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:metric/api/api.dart';
 import 'package:metric/data/database.dart';
 import 'package:metric/data/models/auth_model.dart';
@@ -38,7 +39,8 @@ class AuthService extends ChangeNotifier {
   }
 
   setDeviceToken() async {
-    String deviceToken = notificationService.generateDeviceToken();
+    await notificationService.generateDeviceToken();
+    deviceToken = notificationService.deviceToken;
     await db.deviceSettings.put('deviceToken', deviceToken);
     return deviceToken;
   }

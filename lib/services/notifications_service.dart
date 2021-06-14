@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService extends ChangeNotifier {
+  String _deviceToken;
+  String get deviceToken => _deviceToken;
   FirebaseMessaging messaging;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -39,8 +41,13 @@ class NotificationService extends ChangeNotifier {
     );
   }
 
-  generateDeviceToken() async {
-    return await messaging.getToken().then((value) => value);
+  Future<String> generateDeviceToken() async {
+    messaging = FirebaseMessaging.instance;
+    await messaging.getToken().then((value) {
+      _deviceToken = value;
+    });
+
+    return _deviceToken;
   }
 
   void showNotification(RemoteMessage message) {
