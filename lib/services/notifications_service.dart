@@ -31,13 +31,14 @@ class NotificationService extends ChangeNotifier {
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(notificationService.channel1);
+        ?.createNotificationChannel(channel1);
 
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
+      
     );
   }
 
@@ -53,6 +54,7 @@ class NotificationService extends ChangeNotifier {
   void showNotification(RemoteMessage message) {
     RemoteNotification notification = message.notification;
     AndroidNotification android = message.notification?.android;
+
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin.show(
           notification.hashCode,
@@ -60,9 +62,7 @@ class NotificationService extends ChangeNotifier {
           notification.body,
           NotificationDetails(
               android: AndroidNotificationDetails(
-                  notificationService.channel1.id,
-                  notificationService.channel1.name,
-                  notificationService.channel1.description,
+                  channel1.id, channel1.name, channel1.description,
                   playSound: true,
                   color: Colors.orange,
                   icon: "@mipmap/ic_launcher")));
