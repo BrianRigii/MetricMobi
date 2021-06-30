@@ -14,14 +14,15 @@ class UnitCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(RouteConfig.unitInfoScreen);
+        Navigator.of(context)
+            .pushNamed(RouteConfig.unitInfoScreen, arguments: {'unit': unit});
       },
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: 'pattern1',
+              tag: '${unit.id}',
               child: Image.asset(
                 'assets/images/pattern1.jpg',
                 height: 100,
