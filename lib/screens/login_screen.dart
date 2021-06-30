@@ -18,7 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void _loginFn(String reference, String password) {
     authService.login(reference, password).then((value) {
       if (value != null) {
-        Navigator.of(context).pushReplacementNamed(RouteConfig.loadscreen);
+        Navigator.of(context)
+            .pushReplacementNamed(RouteConfig.studentHomeScreen);
       }
     });
   }

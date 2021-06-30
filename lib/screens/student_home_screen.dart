@@ -1,6 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:metric/services/auth_service.dart';
+import 'package:metric/services/unit_service.dart';
+import 'package:metric/widgets/unit_card.dart';
 
 class StudentHomeScreen extends StatefulWidget {
   const StudentHomeScreen({Key key}) : super(key: key);
@@ -90,8 +92,33 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                 ],
               ),
             ),
-          )
+          ),
+          Expanded(
+              child: Column(
+            children: [
+              Expanded(child: UnitsGrid()),
+            ],
+          ))
         ],
+      ),
+    );
+  }
+}
+
+class UnitsGrid extends StatelessWidget {
+  const UnitsGrid({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 4,
+      ),
+      itemCount: unitService.units.length,
+      itemBuilder: (context, index) => UnitCard(
+        unit: unitService.units[index],
       ),
     );
   }

@@ -1,10 +1,41 @@
 import 'package:flutter/material.dart';
 
+import 'package:metric/data/models/unit_model.dart';
+import 'package:metric/routes.dart';
+
 class UnitCard extends StatelessWidget {
-  const UnitCard({Key key}) : super(key: key);
+  final UnitModel unit;
+  const UnitCard({
+    Key key,
+    this.unit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card();
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(RouteConfig.unitInfoScreen);
+      },
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Hero(
+              tag: 'pattern1',
+              child: Image.asset(
+                'assets/images/pattern1.jpg',
+                height: 100,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${unit.name}'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

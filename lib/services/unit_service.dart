@@ -9,7 +9,7 @@ class UnitService extends ChangeNotifier {
     _isGettingUnits.value = val;
   }
 
-  List<UnitModel> units;
+  List<UnitModel> units = [];
   Future loadUnits() {
     units = [];
     isGettingUnits = true;

@@ -17,6 +17,12 @@ class Api extends DioApi {
   Future getUnits() {
     return dio.get('/units');
   }
+
+  Future getTopics(int unitId) {
+    return dio.get('/topics/$unitId');
+  }
+
+  
 }
 
 Api api = Api();
