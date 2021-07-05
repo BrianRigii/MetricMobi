@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:metric/screens/load_screen.dart';
 import 'package:metric/screens/login_screen.dart';
 import 'package:metric/screens/splash_screen.dart';
@@ -20,5 +19,5 @@ var routes = {
   RouteConfig.loadscreen: (context) => LoadScreen(),
   RouteConfig.homebottomnav: (context) => HomeBottomNav(),
   RouteConfig.studentHomeScreen: (context) => HomeBottomNav(),
-  RouteConfig.unitInfoScreen: (context) => UnitInfoScreen()
+  RouteConfig.unitInfoScreen: (context) => UnitInfoScreen(),
 };

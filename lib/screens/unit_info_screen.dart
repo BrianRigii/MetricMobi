@@ -42,6 +42,41 @@ class UnitInfoScreen extends StatelessWidget {
                       )))
             ],
           ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  UnitOptionCards(
+                    imgIconPath: 'assets/images/Notes.png',
+                    title: 'Summary',
+                    subtitle: '',
+                  ),
+                  UnitOptionCards(
+                    imgIconPath: 'assets/images/Notes.png',
+                    title: 'Notes',
+                    subtitle: '1 attachment',
+                  ),
+                  UnitOptionCards(
+                    imgIconPath: 'assets/images/Assignments.png',
+                    title: 'Assignments',
+                    subtitle: '1 Pending Assignment',
+                  ),
+                  UnitOptionCards(
+                    imgIconPath: 'assets/images/Announcments.png',
+                    title: 'Announcements',
+                    subtitle: '3  ',
+                  ),
+                  UnitOptionCards(
+                    imgIconPath: 'assets/images/Discussions.png',
+                    title: 'Discussion Forums',
+                    subtitle: '3 new notifications',
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -49,23 +84,26 @@ class UnitInfoScreen extends StatelessWidget {
 }
 
 class UnitOptionCards extends StatelessWidget {
-  final IconData icon;
+  final String imgIconPath;
   final String title;
-  final RouteConfig route;
+  final String subtitle;
   const UnitOptionCards({
     Key key,
-    this.icon,
+    this.imgIconPath,
     this.title,
-    this.route,
+    this.subtitle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Icon(icon),
+        leading: Image.asset(
+          imgIconPath,
+          height: 50,
+        ),
         title: Text('$title'),
-        subtitle: Text('$route'),
+        subtitle: Text('$subtitle'),
       ),
     );
   }
