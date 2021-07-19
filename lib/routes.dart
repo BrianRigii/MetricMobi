@@ -1,5 +1,6 @@
 import 'package:metric/screens/load_screen.dart';
 import 'package:metric/screens/login_screen.dart';
+import 'package:metric/screens/notes_info_screen.dart';
 import 'package:metric/screens/splash_screen.dart';
 import 'package:metric/screens/unit_info_screen.dart';
 import 'package:metric/widgets/student_home_bottom_nav.dart';
@@ -11,6 +12,7 @@ class RouteConfig {
   static const homebottomnav = '/homebottomnav';
   static const studentHomeScreen = '/studentHomeScreen';
   static const unitInfoScreen = '/unitInfoScreen';
+  static const notesInfoScreen = '/notesInfoScreen';
 }
 
 var routes = {
@@ -20,4 +22,5 @@ var routes = {
   RouteConfig.homebottomnav: (context) => HomeBottomNav(),
   RouteConfig.studentHomeScreen: (context) => HomeBottomNav(),
   RouteConfig.unitInfoScreen: (context) => UnitInfoScreen(),
+  RouteConfig.notesInfoScreen: (context) => NotesInfoScreen()
 };

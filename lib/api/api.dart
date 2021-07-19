@@ -22,7 +22,13 @@ class Api extends DioApi {
     return dio.get('/topics/$unitId');
   }
 
-  
+  Future getNotes(
+    unitId,
+    unitPeriodId,
+  ) {
+    return dio.get('/notes',
+        queryParameters: {'unit_period_id': unitPeriodId, 'unit_id': unitId});
+  }
 }
 
 Api api = Api();

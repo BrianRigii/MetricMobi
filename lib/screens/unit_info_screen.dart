@@ -53,10 +53,17 @@ class UnitInfoScreen extends StatelessWidget {
                     title: 'Summary',
                     subtitle: '',
                   ),
-                  UnitOptionCards(
-                    imgIconPath: 'assets/images/Notes.png',
-                    title: 'Notes',
-                    subtitle: '1 attachment',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                          RouteConfig.notesInfoScreen,
+                          arguments: {'unit': unit});
+                    },
+                    child: UnitOptionCards(
+                      imgIconPath: 'assets/images/Notes.png',
+                      title: 'Notes',
+                      subtitle: '1 attachment',
+                    ),
                   ),
                   UnitOptionCards(
                     imgIconPath: 'assets/images/Assignments.png',
