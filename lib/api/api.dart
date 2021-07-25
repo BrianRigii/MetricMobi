@@ -37,6 +37,10 @@ class Api extends DioApi {
       'end': hyphenedDates(start)
     });
   }
+
+  Future fileDownload(String filePath, String storagePath) {
+    return dio.download(filePath, storagePath);
+  }
 }
 
 Api api = Api();

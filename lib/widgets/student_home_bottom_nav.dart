@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:metric/screens/load_screen.dart';
 import 'package:metric/screens/student_home_screen.dart';
+import 'package:metric/services/timetable_service.dart';
 import 'package:metric/services/unit_service.dart';
 
 class HomeBottomNav extends StatefulWidget {
@@ -31,6 +32,7 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
   void callApis() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unitService.loadUnits();
+      timeTableService.loadTodaysClasses(DateTime.now(), DateTime.now());
     });
   }
 
@@ -66,13 +68,6 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
             label: 'Messages',
             icon: Icon(
               EvaIcons.messageSquareOutline,
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Notifications',
-            icon: Icon(
-              EvaIcons.bellOutline,
               color: Theme.of(context).primaryColor,
             ),
           ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:metric/data/models/notes_model.dart';
 import 'package:metric/data/models/unit_model.dart';
+import 'package:metric/routes.dart';
 import 'package:metric/services/notes_service.dart';
+import 'package:metric/utils/time_util.dart';
 import 'package:metric/widgets/circular_material_spinner.dart';
 
 class NotesInfoScreen extends StatefulWidget {
@@ -32,6 +35,11 @@ class _NotesInfoScreenState extends State<NotesInfoScreen> {
     });
   }
 
+  void noteTapedFn(NotesModel notes) {
+    Navigator.of(context).pushNamed(RouteConfig.documentviewerscreen,
+        arguments: {'note': notes});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +56,15 @@ class _NotesInfoScreenState extends State<NotesInfoScreen> {
                   itemCount: notesService.notes.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text('Note ${index + 1}'),
+                      onTap: () {
+                        noteTapedFn(notesService.notes[index]);
+                      },
+                      leading: Image.asset(
+                        'assets/images/word.png',
+                      ),
+                      title: Text('${notesService.notes[index].fileName}'),
+                      subtitle: Text(
+                          '${displayDatesFormat(notesService.notes[index].createdAt)}'),
                     );
                   }),
             );
