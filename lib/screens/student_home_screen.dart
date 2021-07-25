@@ -137,10 +137,10 @@ class UnitsGrid extends StatelessWidget {
       onRefresh: () => unitService.loadUnits(),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 4,
-        ),
+            crossAxisCount: 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 4,
+            childAspectRatio: 1.15),
         itemCount: unitService.units.length,
         itemBuilder: (context, index) => UnitCard(
           unit: unitService.units[index],

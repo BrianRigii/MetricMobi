@@ -18,18 +18,27 @@ class UnitCard extends StatelessWidget {
             .pushNamed(RouteConfig.unitInfoScreen, arguments: {'unit': unit});
       },
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Stack(
               children: [
                 Hero(
                   tag: '${unit.id}',
-                  child: Image.asset(
-                    'assets/images/pattern1.jpg',
-                    height: 100,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                    child: Image.asset(
+                      'assets/images/pattern1.jpg',
+                      height: 100,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -52,7 +61,31 @@ class UnitCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //TODO: ADD NUMBER OF COMPLETE CLASSES;
-                    Text('4/${unit.lessonsCount} lessons')
+                    Text(
+                      '4/${unit.lessonsCount} lessons',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/male-avatar.png',
+                          height: 25,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          '${unit.lecturer}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, color: Colors.grey),
+                        )
+                      ],
+                    )
                   ],
                 )),
           ],

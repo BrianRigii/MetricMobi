@@ -1,6 +1,7 @@
 import 'package:metric/api/dio.dart';
 
 import 'package:metric/app_config.dart';
+import 'package:metric/utils/time_util.dart';
 
 class Api extends DioApi {
   Api() : super(AppConfig.appUrl);
@@ -28,6 +29,13 @@ class Api extends DioApi {
   ) {
     return dio.get('/notes',
         queryParameters: {'unit_period_id': unitPeriodId, 'unit_id': unitId});
+  }
+
+  Future getDateClasses(DateTime start, DateTime end) {
+    return dio.get('timetable-occurrence', queryParameters: {
+      'start': hyphenedDates(start),
+      'end': hyphenedDates(start)
+    });
   }
 }
 
