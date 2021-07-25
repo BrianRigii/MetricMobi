@@ -32,6 +32,7 @@ dependencies:
   firebase_messaging: ^10.0.1
   firebase_core: ^1.2.1
   native_pdf_view: ^4.1.0
+  provider: ^5.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
