@@ -41,6 +41,10 @@ class Api extends DioApi {
   Future fileDownload(String filePath, String storagePath) {
     return dio.download(filePath, storagePath);
   }
+
+  Future getAnnouncements() {
+    return dio.get('/announcement');
+  }
 }
 
 Api api = Api();

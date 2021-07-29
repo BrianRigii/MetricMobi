@@ -70,10 +70,17 @@ class UnitInfoScreen extends StatelessWidget {
                     title: 'Assignments',
                     subtitle: '1 Pending Assignment',
                   ),
-                  UnitOptionCards(
-                    imgIconPath: 'assets/images/Announcments.png',
-                    title: 'Announcements',
-                    subtitle: '3  ',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                          RouteConfig.announcementlistscreen,
+                          arguments: {'unit': unit});
+                    },
+                    child: UnitOptionCards(
+                      imgIconPath: 'assets/images/Announcments.png',
+                      title: 'Announcements',
+                      subtitle: '3  ',
+                    ),
                   ),
                   UnitOptionCards(
                     imgIconPath: 'assets/images/Discussions.png',

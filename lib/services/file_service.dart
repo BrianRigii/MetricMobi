@@ -9,7 +9,7 @@ class FileService extends ChangeNotifier {
     return api
         .fileDownload(filePath, "${dir.path}/$fileName$fileId")
         .then((response) {
-      var payload = response.data;
+      // var payload = response.data;
     }).catchError((error) {
       print('Couldnt download file $fileName');
     });

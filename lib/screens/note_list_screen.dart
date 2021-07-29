@@ -35,9 +35,9 @@ class _NotesInfoScreenState extends State<NotesInfoScreen> {
     });
   }
 
-  void noteTapedFn(NotesModel notes) {
+  void noteTapedFn(AttachmentModel file) {
     Navigator.of(context).pushNamed(RouteConfig.documentviewerscreen,
-        arguments: {'note': notes});
+        arguments: {'attachment': file});
   }
 
   @override
@@ -53,18 +53,19 @@ class _NotesInfoScreenState extends State<NotesInfoScreen> {
               loading: gotNotes,
               color: Theme.of(context).primaryColor,
               child: ListView.builder(
-                  itemCount: notesService.notes.length,
+                  itemCount: notesService.notes?.attachments?.length ?? 0,
                   itemBuilder: (context, index) {
                     return ListTile(
                       onTap: () {
-                        noteTapedFn(notesService.notes[index]);
+                        noteTapedFn(notesService.notes.attachments[index]);
                       },
                       leading: Image.asset(
                         'assets/images/word.png',
                       ),
-                      title: Text('${notesService.notes[index].fileName}'),
+                      title:
+                          Text('${notesService.notes.attachments[index].name}'),
                       subtitle: Text(
-                          '${displayDatesFormat(notesService.notes[index].createdAt)}'),
+                          '${displayDatesFormat(notesService.notes.createdAt)}'),
                     );
                   }),
             );

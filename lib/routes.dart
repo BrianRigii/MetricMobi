@@ -1,3 +1,6 @@
+import 'dart:js';
+
+import 'package:metric/screens/announcement_list_screen.dart';
 import 'package:metric/screens/document_viewer_screen.dart';
 import 'package:metric/screens/load_screen.dart';
 import 'package:metric/screens/login_screen.dart';
@@ -15,6 +18,7 @@ class RouteConfig {
   static const unitInfoScreen = '/unitInfoScreen';
   static const notesInfoScreen = '/notesInfoScreen';
   static const documentviewerscreen = '/documentviewerscreen';
+  static const announcementlistscreen = '/announcementlistscreen';
 }
 
 var routes = {
@@ -25,5 +29,6 @@ var routes = {
   RouteConfig.studentHomeScreen: (context) => HomeBottomNav(),
   RouteConfig.unitInfoScreen: (context) => UnitInfoScreen(),
   RouteConfig.notesInfoScreen: (context) => NotesInfoScreen(),
-  RouteConfig.documentviewerscreen: (context) => DocumentViewerScreen()
+  RouteConfig.documentviewerscreen: (context) => DocumentViewerScreen(),
+  RouteConfig.announcementlistscreen: (context) => AnnouncementListScreen()
 };

@@ -20,6 +20,7 @@ class _DocumentViewerScreenState extends State<DocumentViewerScreen> {
   bool isDownloadingFile = true;
   Map<String, dynamic> arguments;
   NotesModel note;
+  AttachmentModel attachment;
 
   @override
   void initState() {
@@ -31,6 +32,7 @@ class _DocumentViewerScreenState extends State<DocumentViewerScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       arguments = ModalRoute.of(context).settings.arguments;
       note = arguments['note'];
+      attachment = arguments['attachment'];
 
       setState(() {
         isDownloadingFile = true;
@@ -38,10 +40,11 @@ class _DocumentViewerScreenState extends State<DocumentViewerScreen> {
 
       var dir = await getApplicationDocumentsDirectory();
 
-      if (await File("${dir.path}/${note.fileName}${note.id}").exists()) {
+      if (await File("${dir.path}/${attachment.name}${attachment.id}")
+          .exists()) {
         _pdfController = PdfController(
-            document:
-                PdfDocument.openFile("${dir.path}/${note.fileName}${note.id}"));
+            document: PdfDocument.openFile(
+                "${dir.path}/${attachment.name}${attachment.id}"));
         print('file exists');
         setState(() {
           isDownloadingFile = false;
@@ -49,11 +52,11 @@ class _DocumentViewerScreenState extends State<DocumentViewerScreen> {
       } else {
         print('downloading file');
         fileService
-            .downloadFile(note.filePath, note.id, note.fileName)
+            .downloadFile(attachment.path, attachment.id, attachment.name)
             .then((value) {
           _pdfController = PdfController(
               document: PdfDocument.openFile(
-                  "${dir.path}/${note.fileName}${note.id}"));
+                  "${dir.path}/${attachment.name}${attachment.id}"));
         });
         setState(() {
           isDownloadingFile = false;
@@ -66,7 +69,7 @@ class _DocumentViewerScreenState extends State<DocumentViewerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${note.fileName}'),
+        title: Text('${attachment.name}'),
         actions: [
           IconButton(
             onPressed: () {},

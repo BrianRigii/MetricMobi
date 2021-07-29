@@ -9,23 +9,21 @@ class NotesService extends ChangeNotifier {
     isGettingNotes.value = val;
   }
 
-  List<NotesModel> notes = [];
+  NotesModel notes = NotesModel();
   Future loadNotes(unitId, unitPeriodId) {
-    notes = [];
     _isGettingNotes = true;
     return api.getNotes(unitId, unitPeriodId).then((response) {
       var payload = response.data;
       _saveNotes(payload);
-    }).catchError((error) {
+    }).catchError((error, stack) {
       _isGettingNotes = false;
-      print('error occured while loading notes');
+      print('error occured while loading notes $error');
+      print(stack);
     });
   }
 
   void _saveNotes(payload) {
-    payload.forEach((note) {
-      notes.add(NotesModel.fromMap(note));
-    });
+    notes = NotesModel.fromMap(payload);
     _isGettingNotes = false;
   }
 }
