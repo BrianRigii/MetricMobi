@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:metric/screens/announcement_list_screen.dart';
 import 'package:metric/screens/document_viewer_screen.dart';
 import 'package:metric/screens/load_screen.dart';

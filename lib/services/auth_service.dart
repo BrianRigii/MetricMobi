@@ -11,7 +11,6 @@ class AuthService extends ChangeNotifier {
   String deviceToken;
 
   ValueNotifier<bool> isLoggingin = ValueNotifier(false);
-  
 
   set _isLoggingin(bool val) {
     isLoggingin.value = val;
@@ -42,6 +41,10 @@ class AuthService extends ChangeNotifier {
     await notificationService.generateDeviceToken();
     deviceToken = notificationService.deviceToken;
     return deviceToken;
+  }
+
+  Future logOut() async {
+    await db.authBox.clear();
   }
 }
 

@@ -1,7 +1,9 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:metric/services/auth_service.dart';
 import 'package:metric/services/unit_service.dart';
+import 'package:metric/widgets/app_drawer.dart';
 import 'package:metric/widgets/circular_material_spinner.dart';
 import 'package:metric/widgets/unit_card.dart';
 
@@ -13,9 +15,12 @@ class StudentHomeScreen extends StatefulWidget {
 }
 
 class _StudentHomeScreenState extends State<StudentHomeScreen> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
+      key: _key,
       body: Column(
         children: [
           Container(
@@ -30,11 +35,12 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        EvaIcons.menu,
-                        color: Colors.white,
-                        size: 30,
-                      ),
+                      GestureDetector(
+                          onTap: () {
+                            _key.currentState.openDrawer();
+                          },
+                          child:
+                              SvgPicture.asset('assets/images/menu_icon.svg')),
                       Row(
                         children: [
                           Icon(

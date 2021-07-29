@@ -17,6 +17,4 @@ class AnnouncementModel {
   }
 }
 
-//Created By and type
-// system generated announcements
-//filter by unit id
+//Created By and type status
