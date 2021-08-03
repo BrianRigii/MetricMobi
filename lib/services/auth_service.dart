@@ -28,6 +28,7 @@ class AuthService extends ChangeNotifier {
     }).catchError((error) {
       print('Error occured while logging in  $error');
       _isLoggingin = false;
+      throw error;
     });
   }
 

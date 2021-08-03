@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:metric/services/auth_service.dart';
+import 'package:metric/utils/connectivity_util.dart';
 
 // import 'package:metric/services/auth_service.dart';
 
@@ -18,6 +19,7 @@ class DioApi {
           'Authorization': 'Bearer ${authService.authUser.accessToken}'
         };
       }
+
       print(
           "${options?.method}: ${options?.baseUrl}${options?.path} ${options?.queryParameters} ${options.data}");
       return handler.next(

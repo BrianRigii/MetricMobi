@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metric/routes.dart';
 import 'package:metric/services/auth_service.dart';
+import 'package:metric/services/error_service.dart';
 import 'package:metric/widgets/circular_material_spinner.dart';
 import 'package:metric/widgets/custom_box_txt_field.dart';
 
@@ -21,6 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.of(context)
             .pushReplacementNamed(RouteConfig.studentHomeScreen);
       }
+    }).catchError((error) {
+      errorService.errorHandler(error: error, context: context);
     });
   }
 
