@@ -23,7 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
             .pushReplacementNamed(RouteConfig.studentHomeScreen);
       }
     }).catchError((error) {
-      errorService.errorHandler(error: error, context: context);
+      errorService.errorHandler(
+          error: error, context: context, message: 'Incorrect Credentials');
     });
   }
 
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: SingleChildScrollView(
+          child: Container(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,11 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 32.0),
                   child: Image.asset(
                     'assets/images/logo.png',
-                    width: 180,
+                    width: 200,
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Form(
                   key: _formKey,
@@ -69,13 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         validatorTxt: 'Password is required',
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
                       ValueListenableBuilder<bool>(
                         valueListenable: authService.isLoggingin,
                         builder: (context, isLoggingin, _) {
                           return MaterialButton(
                             minWidth: 400,
+                            height: 50,
                             disabledColor:
                                 Theme.of(context).primaryColor.withOpacity(.5),
                             color: Theme.of(context).primaryColor,

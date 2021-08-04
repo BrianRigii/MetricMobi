@@ -28,7 +28,7 @@ class ErrorService extends ChangeNotifier {
       if (error.type == DioErrorType.other) {
         _noInternetHandler(context);
       } else if (error.type == DioErrorType.response) {
-        _responseErrorHandler();
+        _responseErrorHandler(context: context, message: message);
       }
     }
   }
@@ -53,7 +53,12 @@ class ErrorService extends ChangeNotifier {
     }
   }
 
-  void _responseErrorHandler() {}
+  void _responseErrorHandler({String message, BuildContext context}) {
+    showCustomToast(
+      context: context,
+      message: message,
+    );
+  }
 
   void cancelNetWorkSubscription() {
     print('canceling network subscription');
