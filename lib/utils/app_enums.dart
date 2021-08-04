@@ -4,6 +4,7 @@ enum HandleMethod {
   snackar,
 }
 enum Scenario {
+  backOnline,
   noInternet,
   responseError,
   appBroke,

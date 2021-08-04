@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:metric/utils/app_enums.dart';
 import 'package:metric/utils/connectivity_util.dart';
 import 'package:metric/widgets/display_units/toast.dart';
@@ -25,22 +26,25 @@ class ErrorService extends ChangeNotifier {
     if (error is DioError) {
       print('Error is $error  and type is ${error.type}');
       if (error.type == DioErrorType.other) {
-        _noInternetHandler();
+        _noInternetHandler(context);
       } else if (error.type == DioErrorType.response) {
         _responseErrorHandler();
       }
     }
   }
 
-  void _noInternetHandler() {
+  void _noInternetHandler(BuildContext context) {
     connectivityService.checkConnectivity();
     if (!connectivityService.isConnected) {
+      print('here');
+      showCustomToast(scenario: Scenario.noInternet, context: context);
       subscription = Connectivity()
           .onConnectivityChanged
           .listen((ConnectivityResult connectivityResult) {
         if (connectivityResult == ConnectivityResult.mobile ||
             connectivityResult == ConnectivityResult.wifi) {
-          showToast('Back Online');
+          showCustomToast(
+              message: 'Back Online', context: context, color: Colors.green);
           cancelNetWorkSubscription();
         } else {
           print('Still offline');
