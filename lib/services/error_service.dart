@@ -17,6 +17,9 @@ class ErrorService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Exiting windows
+  ///
+
   void errorHandler({
     @required error,
     @required BuildContext context,
