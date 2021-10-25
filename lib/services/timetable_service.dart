@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:metric/api/api.dart';
 import 'package:metric/data/models/date_class_model.dart';
 
-List<DateClassModel> dateClasses = [];
-
-ValueNotifier<bool> isGettingDateClasses = ValueNotifier(false);
-
-set _isGettingDateClasses(bool val) {
-  isGettingDateClasses.value = val;
-}
-
 class TimeTableService extends ChangeNotifier {
+  List<DateClassModel> dateClasses = [];
+
+  ValueNotifier<bool> isGettingDateClasses = ValueNotifier(false);
+
+  set _isGettingDateClasses(bool val) {
+    isGettingDateClasses.value = val;
+  }
+
   Future loadTodaysClasses(start, end) {
     dateClasses = [];
     _isGettingDateClasses = true;
@@ -23,13 +23,13 @@ class TimeTableService extends ChangeNotifier {
       _isGettingDateClasses = false;
     });
   }
-}
 
-void _saveDateClasses(payload) {
-  payload.forEach((tclass) {
-    dateClasses.add(DateClassModel.fromMap(tclass));
-  });
-  _isGettingDateClasses = false;
+  void _saveDateClasses(payload) {
+    payload.forEach((tclass) {
+      dateClasses.add(DateClassModel.fromMap(tclass));
+    });
+    _isGettingDateClasses = false;
+  }
 }
 
 TimeTableService timeTableService = TimeTableService();

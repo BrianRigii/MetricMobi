@@ -1,4 +1,6 @@
+import 'package:metric/screens/add_discussion_screen.dart';
 import 'package:metric/screens/announcement_list_screen.dart';
+import 'package:metric/screens/discussion_forum_screen.dart';
 import 'package:metric/screens/document_viewer_screen.dart';
 import 'package:metric/screens/load_screen.dart';
 import 'package:metric/screens/login_screen.dart';
@@ -17,6 +19,8 @@ class RouteConfig {
   static const notesInfoScreen = '/notesInfoScreen';
   static const documentviewerscreen = '/documentviewerscreen';
   static const announcementlistscreen = '/announcementlistscreen';
+  static const discussionforumscreen = '/discussionforumscreen';
+  static const addDisscusionScreen = '/addDisscusionScreen';
 }
 
 var routes = {
@@ -28,5 +32,7 @@ var routes = {
   RouteConfig.unitInfoScreen: (context) => UnitInfoScreen(),
   RouteConfig.notesInfoScreen: (context) => NotesInfoScreen(),
   RouteConfig.documentviewerscreen: (context) => DocumentViewerScreen(),
-  RouteConfig.announcementlistscreen: (context) => AnnouncementListScreen()
+  RouteConfig.announcementlistscreen: (context) => AnnouncementListScreen(),
+  RouteConfig.discussionforumscreen: (context) => DiscussionForum(),
+  RouteConfig.addDisscusionScreen: (context) => AddDisscusionScreen()
 };

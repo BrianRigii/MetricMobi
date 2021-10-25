@@ -3,8 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:metric/data/models/unit_model.dart';
 import 'package:metric/routes.dart';
 
-class UnitInfoScreen extends StatelessWidget {
+class UnitInfoScreen extends StatefulWidget {
   const UnitInfoScreen({Key key}) : super(key: key);
+
+  @override
+  _UnitInfoScreenState createState() => _UnitInfoScreenState();
+}
+
+class _UnitInfoScreenState extends State<UnitInfoScreen> {
+  void navigateTodiscussionForum() {
+    Navigator.of(context).pushNamed(RouteConfig.discussionforumscreen);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +91,13 @@ class UnitInfoScreen extends StatelessWidget {
                       subtitle: '3  ',
                     ),
                   ),
-                  UnitOptionCards(
-                    imgIconPath: 'assets/images/Discussions.png',
-                    title: 'Discussion Forums',
-                    subtitle: '3 new notifications',
+                  GestureDetector(
+                    onTap: navigateTodiscussionForum,
+                    child: UnitOptionCards(
+                      imgIconPath: 'assets/images/Discussions.png',
+                      title: 'Discussion Forums',
+                      subtitle: '3 new notifications',
+                    ),
                   ),
                 ],
               ),
