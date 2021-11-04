@@ -1,6 +1,10 @@
+import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
+
+import 'package:detectable_text_field/widgets/detectable_text_field.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 import 'package:flutter/material.dart';
+import 'package:metric/services/unit_students_service.dart';
 import 'package:metric/widgets/container_border.dart';
 
 class AddDisscusionScreen extends StatefulWidget {
@@ -12,6 +16,20 @@ class AddDisscusionScreen extends StatefulWidget {
 
 class _AddDisscusionScreenState extends State<AddDisscusionScreen> {
   TextEditingController disscusionTextController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
+  bool showContacts = false;
+
+  onUsertapped(name) {
+    var text = "${disscusionTextController.text}${name} ";
+    disscusionTextController.text = text;
+  }
+
+  void toggleContacts() {
+    setState(() {
+      showContacts = !showContacts;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,28 +37,45 @@ class _AddDisscusionScreenState extends State<AddDisscusionScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: TextFormField(
-              textAlignVertical: TextAlignVertical.bottom,
-              cursorColor: Theme.of(context).primaryColor,
-              maxLines: 5,
-              autofillHints: [],
-              decoration: InputDecoration(
-                  hintText: 'Whats on your mind ?',
-                  border: InputBorder.none,
-                  focusColor: Theme.of(context).primaryColor,
-                  prefixIconConstraints: BoxConstraints(),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Icon(EvaIcons.personOutline),
-                  )),
-            ),
-          ),
-          _BottomActions(),
-        ],
-      ),
+      body: Stack(children: [
+        Column(
+          children: [
+            Expanded(
+                child: CustomeTextInput(
+              ctrl: disscusionTextController,
+              onDetectFunc: () => toggleContacts(),
+            )),
+            _BottomActions(),
+          ],
+        ),
+        Visibility(
+          visible: showContacts,
+          child: DraggableScrollableSheet(builder: (
+            context,
+            _scrollController,
+          ) {
+            return SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: unitStudentsService.students
+                    .map((e) => Column(
+                          children: [
+                            ListTile(
+                              dense: true,
+                              title: Text('${e.name}'),
+                              onTap: () {
+                                onUsertapped(e.name);
+                              },
+                            ),
+                            Divider()
+                          ],
+                        ))
+                    .toList(),
+              ),
+            );
+          }),
+        )
+      ]),
     );
   }
 }
@@ -61,25 +96,75 @@ class __BottomActionsState extends State<_BottomActions> {
           color: Colors.black,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(EvaIcons.mapOutline),
-              color: Theme.of(context).primaryColor,
+            Expanded(
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(EvaIcons.mapOutline),
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(EvaIcons.calendarOutline),
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(EvaIcons.attach2Outline),
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                          width: 10,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            border: Border(
+                                left: BorderSide(
+                                    width: 2,
+                                    color: Theme.of(context).primaryColor)),
+                          )),
+                      Container(
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: Icon(EvaIcons.sunOutline),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(EvaIcons.calendarOutline),
-              color: Theme.of(context).primaryColor,
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(EvaIcons.attach2Outline),
-              color: Theme.of(context).primaryColor,
-            )
           ],
         )
       ],
+    );
+  }
+}
+
+class CustomeTextInput extends StatefulWidget {
+  final TextEditingController ctrl;
+  final Function onDetectFunc;
+  const CustomeTextInput({Key key, this.ctrl, this.onDetectFunc})
+      : super(key: key);
+
+  @override
+  _CustomeTextInputState createState() => _CustomeTextInputState();
+}
+
+class _CustomeTextInputState extends State<CustomeTextInput> {
+  @override
+  Widget build(BuildContext context) {
+    return DetectableTextField(
+      maxLines: 500,
+      decoration: InputDecoration(
+          border: InputBorder.none, hintText: 'Whats on your mind ?'),
+      detectionRegExp: detectionRegExp(),
+      controller: widget.ctrl,
+      onDetectionTyped: (String text) {
+        widget.onDetectFunc();
+      },
     );
   }
 }

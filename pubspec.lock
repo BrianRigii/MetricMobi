@@ -204,6 +204,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  detectable_text_field:
+    dependency: "direct main"
+    description:
+      name: detectable_text_field
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   device_info:
     dependency: transitive
     description:
@@ -328,13 +335,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
-  flutter_social_textfield:
-    dependency: "direct main"
-    description:
-      name: flutter_social_textfield
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.6"
   flutter_svg:
     dependency: "direct main"
     description:
