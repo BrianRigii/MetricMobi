@@ -50,6 +50,10 @@ class Api extends DioApi {
     return dio
         .get('/discussion', queryParameters: {'unit_period_id': periodId});
   }
+
+  Future getUnitStudents(int unitId) {
+    return dio.get('/user', queryParameters: {'unit_id': unitId});
+  }
 }
 
 Api api = Api();

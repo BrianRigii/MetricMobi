@@ -4,6 +4,7 @@ class AppConfig {
   static const appUrl = 'https://metric.co.ke/api';
 
   static ThemeData themedata = ThemeData(
+      primarySwatch: Colors.indigo,
       primaryColor: Color.fromRGBO(37, 41, 75, 1),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           foregroundColor: Colors.white,

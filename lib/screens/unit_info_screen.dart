@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:metric/data/models/unit_model.dart';
 import 'package:metric/routes.dart';
+import 'package:metric/services/unit_students_service.dart';
 
 class UnitInfoScreen extends StatefulWidget {
   const UnitInfoScreen({Key key}) : super(key: key);
@@ -11,15 +12,29 @@ class UnitInfoScreen extends StatefulWidget {
 }
 
 class _UnitInfoScreenState extends State<UnitInfoScreen> {
+  UnitModel unit;
+  Map<String, UnitModel> arguments;
   void navigateTodiscussionForum() {
     Navigator.of(context).pushNamed(RouteConfig.discussionforumscreen);
   }
 
+  void callApis() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unitStudentsService.loadUnitStudents(unit.id);
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    arguments = ModalRoute.of(context).settings.arguments;
+    unit = arguments['unit'];
+
+    callApis();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Map<String, UnitModel> arguments =
-        ModalRoute.of(context).settings.arguments;
-    UnitModel unit = arguments['unit'];
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

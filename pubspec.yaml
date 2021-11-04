@@ -37,6 +37,7 @@ dependencies:
   path_provider: ^2.0.2
   flutter_svg: ^0.22.0
   fluttertoast: ^8.0.8
+  flutter_social_textfield: ^0.0.6
 
 
 
