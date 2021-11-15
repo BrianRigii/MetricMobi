@@ -22,6 +22,9 @@ class _AddDisscusionScreenState extends State<AddDisscusionScreen> {
   onUsertapped(name) {
     var text = "${disscusionTextController.text}${name} ";
     disscusionTextController.text = text;
+
+    disscusionTextController.selection = TextSelection.fromPosition(
+        TextPosition(offset: disscusionTextController.text.length));
   }
 
   void toggleContacts() {
@@ -36,6 +39,7 @@ class _AddDisscusionScreenState extends State<AddDisscusionScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [TextButton(onPressed: () {}, child: Text('post'))],
       ),
       body: Stack(children: [
         Column(
@@ -56,21 +60,26 @@ class _AddDisscusionScreenState extends State<AddDisscusionScreen> {
           ) {
             return SingleChildScrollView(
               controller: _scrollController,
-              child: Column(
-                children: unitStudentsService.students
-                    .map((e) => Column(
-                          children: [
-                            ListTile(
-                              dense: true,
-                              title: Text('${e.name}'),
-                              onTap: () {
-                                onUsertapped(e.name);
-                              },
-                            ),
-                            Divider()
-                          ],
-                        ))
-                    .toList(),
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: unitStudentsService.students
+                      .map((e) => Column(
+                            children: [
+                              ListTile(
+                                dense: true,
+                                leading: Image.asset(
+                                    'assets/images/male-avatar.png'),
+                                title: Text('${e.name}'),
+                                onTap: () {
+                                  onUsertapped(e.name);
+                                },
+                              ),
+                              Divider()
+                            ],
+                          ))
+                      .toList(),
+                ),
               ),
             );
           }),
@@ -159,7 +168,13 @@ class _CustomeTextInputState extends State<CustomeTextInput> {
     return DetectableTextField(
       maxLines: 500,
       decoration: InputDecoration(
-          border: InputBorder.none, hintText: 'Whats on your mind ?'),
+          border: InputBorder.none,
+          hintText: 'Whats on your mind ?',
+          contentPadding: EdgeInsets.only(left: 8.0),
+          prefix: Image.asset(
+            'assets/images/male-avatar.png',
+            height: 40,
+          )),
       detectionRegExp: detectionRegExp(),
       controller: widget.ctrl,
       onDetectionTyped: (String text) {
