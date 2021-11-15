@@ -1,5 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:metric/screens/calendar_screen.dart';
+import 'package:metric/screens/chat_screen.dart';
 import 'package:metric/screens/load_screen.dart';
 import 'package:metric/screens/student_home_screen.dart';
 import 'package:metric/services/timetable_service.dart';
@@ -21,7 +23,12 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
     });
   }
 
-  List<Widget> _pages = [StudentHomeScreen(), LoadScreen()];
+  List<Widget> _pages = [
+    StudentHomeScreen(),
+    LoadScreen(),
+    CalendarScreen(),
+    ChatScreen()
+  ];
 
   @override
   void initState() {
