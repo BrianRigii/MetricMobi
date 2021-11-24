@@ -20,7 +20,10 @@ class _AddDisscusionScreenState extends State<AddDisscusionScreen> {
   bool showContacts = false;
 
   onUsertapped(name) {
-    var text = "${disscusionTextController.text}${name} ";
+    print(' match is ${disscusionTextController.text.matchAsPrefix('@')}');
+    print(' match is ${disscusionTextController.text.matchAsPrefix('@')}');
+
+    var text = "${disscusionTextController.text}$name ";
     disscusionTextController.text = text;
 
     disscusionTextController.selection = TextSelection.fromPosition(
