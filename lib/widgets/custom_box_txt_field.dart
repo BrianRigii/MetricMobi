@@ -4,18 +4,21 @@ class CustomBoxTxtField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String label;
   final String validatorTxt;
+  final String autoFillHint;
 
-  const CustomBoxTxtField({
-    Key key,
-    this.textEditingController,
-    this.label,
-    this.validatorTxt,
-  }) : super(key: key);
+  const CustomBoxTxtField(
+      {Key key,
+      this.textEditingController,
+      this.label,
+      this.validatorTxt,
+      this.autoFillHint})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: textEditingController,
+      autofillHints: [autoFillHint],
       decoration: InputDecoration(
         labelText: '$label',
         enabledBorder: OutlineInputBorder(

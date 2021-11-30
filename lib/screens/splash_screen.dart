@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (authService.isLoggedIn) {
       Navigator.of(context).pushNamed(RouteConfig.homebottomnav);
     } else {
-      Navigator.of(context).pushNamed(RouteConfig.loginscreen);
+      Navigator.of(context).pushNamed(RouteConfig.clientCodeScreen);
     }
   }
 
