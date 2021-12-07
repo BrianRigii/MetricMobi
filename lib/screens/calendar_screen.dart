@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key key}) : super(key: key);
@@ -19,8 +20,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           Container(
               color: Theme.of(context).primaryColor,
               child: Padding(
-                padding:
-                    const EdgeInsets.only(top: 35.0, left: 16.0, right: 16.0),
+                padding: const EdgeInsets.only(
+                    top: 35.0, left: 16.0, right: 16.0, bottom: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -64,7 +65,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     )
                   ],
                 ),
-              ))
+              )),
+          Expanded(
+              child: Column(
+            children: [
+              TableCalendar(
+                  calendarFormat: CalendarFormat.week,
+                  focusedDay: DateTime.now(),
+                  firstDay: DateTime.now().subtract(Duration(days: 2)),
+                  lastDay: DateTime.now().add(Duration(days: 30)))
+            ],
+          ))
         ]));
   }
 }

@@ -12,7 +12,7 @@ class AppConfig {
       primaryColor: Color.fromRGBO(37, 41, 75, 1),
       textTheme: TextTheme(
           headline1: TextStyle(
-              fontSize: 25, fontWeight: FontWeight.w500, color: Colors.white)),
+              fontSize: 25, fontWeight: FontWeight.w700, color: Colors.white)),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           foregroundColor: Colors.white,
           backgroundColor: Color.fromRGBO(37, 41, 75, 1)),
