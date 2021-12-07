@@ -25,8 +25,8 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
 
   List<Widget> _pages = [
     StudentHomeScreen(),
-    LoadScreen(),
     CalendarScreen(),
+    LoadScreen(),
     ChatScreen()
   ];
 

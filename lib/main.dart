@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:metric/app_config.dart';
 import 'package:metric/routes.dart';
 import 'package:metric/services/notifications_service.dart';
@@ -10,6 +11,11 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 Future<void> main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      // navigation bar color
+
+      statusBarBrightness: Brightness.light // status bar color
+      ));
   WidgetsFlutterBinding.ensureInitialized();
   await notificationService.init();
   await notificationService.setup();
