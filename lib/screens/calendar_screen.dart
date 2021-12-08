@@ -21,7 +21,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               color: Theme.of(context).primaryColor,
               child: Padding(
                 padding: const EdgeInsets.only(
-                    top: 35.0, left: 16.0, right: 16.0, bottom: 30),
+                    top: 45.0, left: 16.0, right: 16.0, bottom: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -60,7 +60,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       height: 8,
                     ),
                     Text(
-                      'Calendar',
+                      'My Calendar',
                       style: Theme.of(context).textTheme.headline1,
                     )
                   ],
@@ -69,11 +69,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
           Expanded(
               child: Column(
             children: [
-              TableCalendar(
-                  calendarFormat: CalendarFormat.week,
-                  focusedDay: DateTime.now(),
-                  firstDay: DateTime.now().subtract(Duration(days: 2)),
-                  lastDay: DateTime.now().add(Duration(days: 30)))
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0, vertical: 8.0),
+                    child: TableCalendar(
+                        headerVisible: false,
+                        calendarFormat: CalendarFormat.week,
+                        focusedDay: DateTime.now(),
+                        firstDay: DateTime.now().subtract(Duration(days: 2)),
+                        lastDay: DateTime.now().add(Duration(days: 30))),
+                  ),
+                ),
+              )
             ],
           ))
         ]));
