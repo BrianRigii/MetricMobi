@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class MessageModel {
   final int id;
   final int senderId;
