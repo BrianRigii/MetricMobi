@@ -54,6 +54,18 @@ class Api extends DioApi {
   Future getUnitStudents(int unitId) {
     return dio.get('/user', queryParameters: {'unit_id': unitId});
   }
+
+  Future getMessages(int userId) {
+    return dio.get('/message', queryParameters: {'userId': userId});
+  }
+
+  Future sendMessage({int receivingId, String messages}) {
+    return dio.post('/message');
+  }
+
+  Future notifyTyping() {
+    return dio.get('/typing');
+  }
 }
 
 Api api = Api();

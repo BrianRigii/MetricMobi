@@ -76,6 +76,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 4.0, vertical: 8.0),
                     child: TableCalendar(
+                      
                         headerVisible: false,
                         calendarFormat: CalendarFormat.week,
                         focusedDay: DateTime.now(),
