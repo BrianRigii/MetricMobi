@@ -22,7 +22,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _loadMessages();
   }
 
-  void _loadMessages() {
+  _loadMessages() async {
     messagingService.loadMessages(authService.authUser.id).catchError((error) {
       errorService.errorHandler(error: error, context: context);
     });
@@ -79,11 +79,20 @@ class _ChatScreenState extends State<ChatScreen> {
               ],
             ),
           )),
-      Expanded(child: ListView.builder(itemBuilder: (context, index) {
-        return _MessageTile(
-          message: messagingService.messages[index],
-        );
-      }))
+      Expanded(
+          child: RefreshIndicator(
+        onRefresh: _loadMessages(),
+        child: ListView.builder(
+            itemCount: messagingService.messages.length,
+            itemBuilder: (
+              context,
+              index,
+            ) {
+              return _MessageTile(
+                message: messagingService.messages[index],
+              );
+            }),
+      ))
     ]));
   }
 }
