@@ -1,6 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:metric/data/models/message_model.dart';
+import 'package:metric/services/assigned_user_service.dart';
 import 'package:metric/services/auth_service.dart';
 import 'package:metric/services/error_service.dart';
 import 'package:metric/services/messaging_service.dart';
@@ -77,7 +79,28 @@ class _ChatScreenState extends State<ChatScreen> {
               ],
             ),
           )),
-      Expanded(child: Column())
+      Expanded(child: ListView.builder(itemBuilder: (context, index) {
+        return _MessageTile(
+          message: messagingService.messages[index],
+        );
+      }))
     ]));
+  }
+}
+
+class _MessageTile extends StatelessWidget {
+  final MessageModel message;
+  const _MessageTile({Key key, this.message}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      isThreeLine: false,
+      dense: true,
+      title: Text(assignedUserService.users
+          .firstWhere((element) => element.id == message.id)
+          .name),
+      subtitle: Text("${message.message}"),
+    );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:metric/data/models/unit_model.dart';
 import 'package:metric/routes.dart';
-import 'package:metric/services/unit_students_service.dart';
+import 'package:metric/services/assigned_user_service.dart';
 
 class UnitInfoScreen extends StatefulWidget {
   const UnitInfoScreen({Key key}) : super(key: key);
@@ -20,7 +20,7 @@ class _UnitInfoScreenState extends State<UnitInfoScreen> {
 
   void callApis() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      unitStudentsService.loadUnitStudents(unit.id);
+      assignedUserService.loadUnitStudents(unitId: unit.id);
     });
   }
 

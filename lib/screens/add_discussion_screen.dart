@@ -4,7 +4,7 @@ import 'package:detectable_text_field/widgets/detectable_text_field.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 import 'package:flutter/material.dart';
-import 'package:metric/services/unit_students_service.dart';
+import 'package:metric/services/assigned_user_service.dart';
 import 'package:metric/widgets/container_border.dart';
 
 class AddDisscusionScreen extends StatefulWidget {
@@ -66,7 +66,7 @@ class _AddDisscusionScreenState extends State<AddDisscusionScreen> {
               child: Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  children: unitStudentsService.students
+                  children: assignedUserService.users
                       .map((e) => Column(
                             children: [
                               ListTile(

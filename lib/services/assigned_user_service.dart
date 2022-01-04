@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:metric/api/api.dart';
 import 'package:metric/data/models/student_model.dart';
 
-class UnitStudentsService extends ChangeNotifier {
-  List<StudentModel> students = [];
+class AssignedUsersService extends ChangeNotifier {
+  List<AssignedUser> users = [];
 
-  Future loadUnitStudents(unitId) {
+  Future loadUnitStudents({unitId}) {
     return api.getUnitStudents(unitId).then((response) {
       var payload = response.data;
 
@@ -17,9 +17,9 @@ class UnitStudentsService extends ChangeNotifier {
 
   void _saveStudents(payload) {
     payload.forEach((data) {
-      students.add(StudentModel.fromMap(data));
+      users.add(AssignedUser.fromMap(data));
     });
   }
 }
 
-UnitStudentsService unitStudentsService = UnitStudentsService();
+AssignedUsersService assignedUserService = AssignedUsersService();
