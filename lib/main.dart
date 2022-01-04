@@ -11,11 +11,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 Future<void> main() async {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      // navigation bar color
-
-      statusBarBrightness: Brightness.light // status bar color
-      ));
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
   WidgetsFlutterBinding.ensureInitialized();
   await notificationService.init();
   await notificationService.setup();

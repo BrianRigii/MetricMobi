@@ -14,6 +14,7 @@ class MessagingService extends ChangeNotifier {
   }
 
   Future loadMessages(userId) {
+    print('user id is $userId');
     messages.clear();
     _isGettingMessages = true;
     return api.getMessages(userId).then((response) {

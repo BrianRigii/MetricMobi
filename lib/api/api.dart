@@ -32,7 +32,7 @@ class Api extends DioApi {
   }
 
   Future getDateClasses(DateTime start, DateTime end) {
-    return dio.get('timetable-occurrence', queryParameters: {
+    return dio.get('/timetable-occurrence', queryParameters: {
       'start': hyphenedDates(start),
       'end': hyphenedDates(start)
     });
@@ -56,7 +56,7 @@ class Api extends DioApi {
   }
 
   Future getMessages(int userId) {
-    return dio.get('/message', queryParameters: {'userId': userId});
+    return dio.get('/message', queryParameters: {'user_id': userId});
   }
 
   Future sendMessage({int receivingId, String messages}) {
