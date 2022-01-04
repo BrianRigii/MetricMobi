@@ -31,7 +31,7 @@ class ErrorService extends ChangeNotifier {
       if (error.type == DioErrorType.other) {
         _noInternetHandler(context);
       } else if (error.type == DioErrorType.response) {
-        _responseErrorHandler(context: context, message: message);
+        _responseErrorHandler(context: context, message: message, error: error);
       }
     }
   }
@@ -56,10 +56,10 @@ class ErrorService extends ChangeNotifier {
     }
   }
 
-  void _responseErrorHandler({String message, BuildContext context}) {
+  void _responseErrorHandler({String message, BuildContext context, error}) {
     showCustomToast(
       context: context,
-      message: message,
+      message: message == null ? error : message,
     );
   }
 
