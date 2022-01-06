@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metric/app_config.dart';
 import 'package:metric/routes.dart';
+import 'package:metric/services/messaging_service.dart';
 import 'package:metric/services/notifications_service.dart';
+import 'package:provider/provider.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await notificationService.init();
@@ -37,10 +39,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Metric',
-        theme: AppConfig.themedata,
-        initialRoute: RouteConfig.splashscreen,
-        routes: routes);
+    return MultiProvider(
+      providers: [ChangeNotifierProvider.value(value: messagingService)],
+      child: MaterialApp(
+          title: 'Metric',
+          theme: AppConfig.themedata,
+          initialRoute: RouteConfig.splashscreen,
+          routes: routes),
+    );
   }
 }

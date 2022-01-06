@@ -24,8 +24,8 @@ class MessageModel {
         senderId: msg['sender_id'],
         recieverId: msg['receiver_id'],
         message: msg['message'],
-        read: msg['read'],
-        received: msg['received'],
+        read: msg['read'] == 1 ? true : false,
+        received: msg['received'] == 1 ? true : false,
         createdAt:
             msg['received'] != null ? DateTime.parse(msg['received']) : null,
         readAT: msg['received_at'] != null

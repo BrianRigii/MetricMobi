@@ -6,6 +6,8 @@ import 'package:metric/services/assigned_user_service.dart';
 import 'package:metric/services/auth_service.dart';
 import 'package:metric/services/error_service.dart';
 import 'package:metric/services/messaging_service.dart';
+import 'package:metric/widgets/circular_material_spinner.dart';
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key key}) : super(key: key);
@@ -22,14 +24,17 @@ class _ChatScreenState extends State<ChatScreen> {
     _loadMessages();
   }
 
-  _loadMessages() async {
-    messagingService.loadMessages(authService.authUser.id).catchError((error) {
+  Future<void> _loadMessages() {
+    return messagingService
+        .loadMessages(authService.authUser.id)
+        .catchError((error) {
       errorService.errorHandler(error: error, context: context);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print('Messages are ${messagingService.messages.length}');
     return Scaffold(
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
@@ -80,19 +85,25 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           )),
       Expanded(
-          child: RefreshIndicator(
-        onRefresh: _loadMessages(),
-        child: ListView.builder(
-            itemCount: messagingService.messages.length,
-            itemBuilder: (
-              context,
-              index,
-            ) {
-              return _MessageTile(
-                message: messagingService.messages[index],
-              );
-            }),
-      ))
+          child: Selector<MessagingService, bool>(
+              selector: (context, messagingService) =>
+                  messagingService.isGettingMessages,
+              builder: (context, isGettingMessages, _) {
+                return CircularMaterialSpinner(
+                  loading: isGettingMessages,
+                  color: Theme.of(context).primaryColor,
+                  child: ListView.builder(
+                      itemCount: messagingService.messages.length,
+                      itemBuilder: (
+                        context,
+                        index,
+                      ) {
+                        return _MessageTile(
+                          message: messagingService.messages[index],
+                        );
+                      }),
+                );
+              }))
     ]));
   }
 }

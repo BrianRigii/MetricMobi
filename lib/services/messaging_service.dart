@@ -6,21 +6,23 @@ class MessagingService extends ChangeNotifier {
   bool _isGettingMessages = false;
   bool get isGettingMessages => _isGettingMessages;
 
-  List<MessageModel> messages = [];
-
   set isGettingMessages(bool val) {
     _isGettingMessages = val;
     notifyListeners();
   }
 
+  List<MessageModel> messages = [];
+
   Future loadMessages(userId) {
     print('user id is $userId');
     messages.clear();
-    _isGettingMessages = true;
+    isGettingMessages = true;
     return api.getMessages(userId).then((response) {
       var payload = response.data;
       _saveMessages(payload);
     }).catchError((error) {
+      print('error occured while loading messages $error');
+      isGettingMessages = false;
       return throw error;
     });
   }
