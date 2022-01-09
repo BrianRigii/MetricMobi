@@ -20,8 +20,9 @@ class MessagingService extends ChangeNotifier {
     return api.getMessages(userId).then((response) {
       var payload = response.data;
       _saveMessages(payload);
-    }).catchError((error) {
+    }).catchError((error, stack) {
       print('error occured while loading messages $error');
+
       isGettingMessages = false;
       return throw error;
     });

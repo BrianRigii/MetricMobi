@@ -6,6 +6,7 @@ import 'package:metric/services/assigned_user_service.dart';
 import 'package:metric/services/auth_service.dart';
 import 'package:metric/services/error_service.dart';
 import 'package:metric/services/messaging_service.dart';
+import 'package:metric/widgets/app_drawer.dart';
 import 'package:metric/widgets/circular_material_spinner.dart';
 import 'package:provider/provider.dart';
 
@@ -24,87 +25,92 @@ class _ChatScreenState extends State<ChatScreen> {
     _loadMessages();
   }
 
-  Future<void> _loadMessages() {
-    return messagingService
-        .loadMessages(authService.authUser.id)
-        .catchError((error) {
-      errorService.errorHandler(error: error, context: context);
+  _loadMessages() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      messagingService
+          .loadMessages(authService.authUser.id)
+          .catchError((error) {
+        errorService.errorHandler(error: error, context: context);
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Messages are ${messagingService.messages.length}');
     return Scaffold(
+        drawer: AppDrawer(),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Container(
-          color: Theme.of(context).primaryColor,
-          child: Padding(
-            padding: const EdgeInsets.only(
-                top: 45.0, left: 16.0, right: 16.0, bottom: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Container(
+              color: Theme.of(context).primaryColor,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 45.0, left: 16.0, right: 16.0, bottom: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                        onTap: () {
-                          _key.currentState.openDrawer();
-                        },
-                        child: SvgPicture.asset('assets/images/menu_icon.svg')),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          EvaIcons.bellOutline,
-                          color: Colors.white,
-                          size: 30,
+                        GestureDetector(
+                            onTap: () {
+                              _key.currentState.openDrawer();
+                            },
+                            child: SvgPicture.asset(
+                                'assets/images/menu_icon.svg')),
+                        Row(
+                          children: [
+                            Icon(
+                              EvaIcons.bellOutline,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(150)),
+                              child: Image.asset(
+                                'assets/images/strath_logo.jpg',
+                                height: 40,
+                              ),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(150)),
-                          child: Image.asset(
-                            'assets/images/strath_logo.jpg',
-                            height: 40,
-                          ),
-                        )
                       ],
                     ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Messages',
+                      style: Theme.of(context).textTheme.headline1,
+                    )
                   ],
                 ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  'Messages',
-                  style: Theme.of(context).textTheme.headline1,
-                )
-              ],
-            ),
-          )),
-      Expanded(
-          child: Selector<MessagingService, bool>(
-              selector: (context, messagingService) =>
-                  messagingService.isGettingMessages,
-              builder: (context, isGettingMessages, _) {
-                return CircularMaterialSpinner(
-                  loading: isGettingMessages,
-                  color: Theme.of(context).primaryColor,
-                  child: ListView.builder(
-                      itemCount: messagingService.messages.length,
-                      itemBuilder: (
-                        context,
-                        index,
-                      ) {
-                        return _MessageTile(
-                          message: messagingService.messages[index],
-                        );
-                      }),
-                );
-              }))
-    ]));
+              )),
+          Expanded(
+              child: Selector<MessagingService, bool>(
+                  selector: (context, messagingService) =>
+                      messagingService.isGettingMessages,
+                  builder: (context, isGettingMessages, _) {
+                    return CircularMaterialSpinner(
+                      loading: isGettingMessages,
+                      color: Theme.of(context).primaryColor,
+                      child: ListView.builder(
+                          padding: EdgeInsets.all(0),
+                          itemCount: messagingService.messages.length,
+                          itemBuilder: (
+                            context,
+                            index,
+                          ) {
+                            return _MessageTile(
+                              message: messagingService.messages[index],
+                            );
+                          }),
+                    );
+                  }))
+        ]));
   }
 }
 
@@ -117,9 +123,14 @@ class _MessageTile extends StatelessWidget {
     return ListTile(
       isThreeLine: false,
       dense: true,
-      title: Text(assignedUserService.users
-          .firstWhere((element) => element.id == message.id)
-          .name),
+      title: Text(
+        assignedUserService.users
+                .firstWhere((element) => element.id == message.senderId,
+                    orElse: () => null)
+                ?.name ??
+            'John Doe',
+        style: TextStyle(fontWeight: FontWeight.w500),
+      ),
       subtitle: Text("${message.message}"),
     );
   }

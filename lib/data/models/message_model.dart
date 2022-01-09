@@ -26,11 +26,10 @@ class MessageModel {
         message: msg['message'],
         read: msg['read'] == 1 ? true : false,
         received: msg['received'] == 1 ? true : false,
-        createdAt:
-            msg['received'] != null ? DateTime.parse(msg['received']) : null,
-        readAT: msg['received_at'] != null
-            ? DateTime.parse(msg['received_at'])
-            : null);
+        createdAt: msg['created_at'] != null
+            ? DateTime.parse(msg['created_at'])
+            : null,
+        readAT: msg['read_at'] != null ? DateTime.parse(msg['read_at']) : null);
   }
 }
 
