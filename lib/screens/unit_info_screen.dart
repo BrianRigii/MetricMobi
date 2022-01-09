@@ -73,7 +73,7 @@ class _UnitInfoScreenState extends State<UnitInfoScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   UnitOptionCards(
-                    imgIconPath: 'assets/images/Notes.png',
+                    imgIconPath: 'assets/images/notes.png',
                     title: 'Summary',
                     subtitle: '',
                   ),
@@ -84,13 +84,13 @@ class _UnitInfoScreenState extends State<UnitInfoScreen> {
                           arguments: {'unit': unit});
                     },
                     child: UnitOptionCards(
-                      imgIconPath: 'assets/images/Notes.png',
+                      imgIconPath: 'assets/images/notes.png',
                       title: 'Notes',
                       subtitle: '1 attachment',
                     ),
                   ),
                   UnitOptionCards(
-                    imgIconPath: 'assets/images/Assignments.png',
+                    imgIconPath: 'assets/images/assignments.png',
                     title: 'Assignments',
                     subtitle: '1 Pending Assignment',
                   ),
@@ -101,7 +101,7 @@ class _UnitInfoScreenState extends State<UnitInfoScreen> {
                           arguments: {'unit': unit});
                     },
                     child: UnitOptionCards(
-                      imgIconPath: 'assets/images/Announcments.png',
+                      imgIconPath: 'assets/images/announcements.png',
                       title: 'Announcements',
                       subtitle: '3  ',
                     ),
@@ -109,7 +109,7 @@ class _UnitInfoScreenState extends State<UnitInfoScreen> {
                   GestureDetector(
                     onTap: navigateTodiscussionForum,
                     child: UnitOptionCards(
-                      imgIconPath: 'assets/images/Discussions.png',
+                      imgIconPath: 'assets/images/discussions.png',
                       title: 'Discussion Forums',
                       subtitle: '3 new notifications',
                     ),

@@ -39,6 +39,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _key,
         drawer: AppDrawer(),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
