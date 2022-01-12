@@ -17,7 +17,7 @@ class StreamSocket {
 
 void connectAndListen() {
   print('starting sockets');
-  IO.Socket socket = IO.io('wss://metric.co.ke:6001');
+  IO.Socket socket = IO.io('http://metric.co.ke:6001');
   socket.onConnect((_) {
     print('connect');
     socket.emit('msg', 'test');
