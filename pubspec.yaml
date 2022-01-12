@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^8.0.8
   detectable_text_field: ^2.0.3
   table_calendar: ^3.0.3
+  socket_io_client: ^1.0.2
 
 
 

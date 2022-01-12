@@ -5,6 +5,8 @@ import 'package:metric/app_config.dart';
 import 'package:metric/routes.dart';
 import 'package:metric/services/messaging_service.dart';
 import 'package:metric/services/notifications_service.dart';
+import 'package:metric/utils/socket_util.dart';
+
 import 'package:provider/provider.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -19,6 +21,8 @@ Future<void> main() async {
   await notificationService.init();
   await notificationService.setup();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  connectAndListen();
 
   runApp(MyApp());
 }
